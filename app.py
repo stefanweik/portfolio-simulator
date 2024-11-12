@@ -50,10 +50,10 @@ with col1:
     savings = st.slider('Sparbuch (%)', 0, 100, 20)
     startup = st.slider('1 Startup (%)', 0, 100, 10)
     startups = st.slider('100 Startups (%)', 0, 100, 10)
-    initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
 
 with col2:
-    years = st.slider('Jahre', 1, 10, 10)
+    initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
+    years = st.slider('Jahre', 1, 60, 10)
 
 # Prüfe, ob Gewichte 100% ergeben
 total_weight = stocks + savings + startup + startups
@@ -81,7 +81,7 @@ else:
 
 # Zusätzliche Informationen
 st.markdown("""
-### Annahmen für die Simulation:
+### Annahmen für die Investment-Optionen:
 - **Aktien**: Durchschnittliche Rendite 10% p.a., Standardabweichung 22%
 - **Sparbuch**: Durchschnittliche Rendite 0.5% p.a., Standardabweichung 0%
 - **Startup**: 
