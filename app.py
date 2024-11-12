@@ -43,9 +43,7 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
 # Streamlit Interface
 st.title('Zukunftstag Portfolio Challenge')
 st.text('Du hast 100 CHF und kannst in Aktien, ein Sparbuch, ein Startup oder ein Portfolio von 100 Startups investieren.')
-st.text('Wähle die Portfolio-Gewichte (linke spalte) so, dass sie sich zu 100% addieren.')
-# now bold text:
-st.markdown('**Ziel**: Finde die beste Portfolio-Strategie für die nächsten 10 Jahre!')
+st.markdown('**Ziel**: Finde die besten Portfolio-Strategie (linke spalte) für die nächsten 10 Jahre!')
 
 # Eingabefelder
 col1, col2 = st.columns(2)
@@ -58,6 +56,11 @@ with col1:
 with col2:
     initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
     years = st.slider('Jahre', 1, 60, 10)
+
+# Add refresh button
+refresh = st.button('Neu simulieren')
+if refresh:
+    st.experimental_rerun()
 
 # Prüfe, ob Gewichte 100% ergeben
 total_weight = stocks + savings + startup + startups
