@@ -3,10 +3,11 @@ import numpy as np
 import pandas as pd
 import plotly.express as px
 
-def simulate_portfolio(stocks_weight, savings_weight, startup_weight, initial_amount, years):
+def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_weight, initial_amount, years):
     # Parameter für Renditen
     stocks_mean, stocks_std = 0.10, 0.22
     savings_mean, savings_std = 0.005, 0
+    startups_mean, startups_std = 0.20, 0.40
     
     # Einmalige Entscheidung über Startup Erfolg
     startup_success = np.random.random() < 0.1  # 10% Chance auf Erfolg
@@ -19,6 +20,7 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, initial_am
     for year in range(years):
         stocks_return = np.random.normal(stocks_mean, stocks_std)
         savings_return = np.random.normal(savings_mean, savings_std)
+        startups_return = np.random.normal(startups_mean, startups_std)
         
         # Startup Return basierend auf initialem Erfolg/Misserfolg
         if not startup_success and year == 0:
@@ -30,7 +32,8 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, initial_am
             
         portfolio_return = (stocks_weight * stocks_return) + \
                          (savings_weight * savings_return) + \
-                         (startup_weight * startup_return)
+                         (startup_weight * startup_return) + \
+                         (startups_weight * startups_return)
         
         new_value = portfolio_values[-1] * (1 + portfolio_return)
         portfolio_values.append(new_value)
@@ -44,20 +47,21 @@ st.title('Portfolio Simulator')
 col1, col2 = st.columns(2)
 with col1:
     stocks = st.slider('Aktien (%)', 0, 100, 60)
-    initial = st.number_input('Startkapital (€)', 1000, 1000000, 10000)
+    savings = st.slider('Sparbuch (%)', 0, 100, 20)
+    startup = st.slider('1 Startup (%)', 0, 100, 10)
+    startups = st.slider('100 Startups (%)', 0, 100, 10)
+    initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
 
 with col2:
-    savings = st.slider('Sparbuch (%)', 0, 100, 30)
-    startup = st.slider('Startup (%)', 0, 100, 10)
-    years = st.slider('Jahre', 1, 30, 10)
+    years = st.slider('Jahre', 1, 10, 10)
 
 # Prüfe, ob Gewichte 100% ergeben
-total_weight = stocks + savings + startup
+total_weight = stocks + savings + startup + startups
 if total_weight != 100:
     st.error('Die Gewichte müssen sich zu 100% addieren!')
 else:
     # Simulation durchführen
-    results = simulate_portfolio(stocks/100, savings/100, startup/100, initial, years)
+    results = simulate_portfolio(stocks/100, savings/100, startup/100, startups/100, initial, years)
     
     # Ergebnisse plotten
     df = pd.DataFrame({
@@ -71,16 +75,17 @@ else:
     st.plotly_chart(fig)
 
     # Finale Statistiken
-    st.write(f'Startkapital: {initial:,.2f} €')
-    st.write(f'Endkapital: {results[-1]:,.2f} €')
+    st.write(f'Startkapital: {initial:,.2f} CHF')
+    st.write(f'Endkapital: {results[-1]:,.2f} CHF')
     st.write(f'Gesamtrendite: {((results[-1]/initial - 1) * 100):,.2f}%')
 
 # Zusätzliche Informationen
 st.markdown("""
 ### Annahmen für die Simulation:
-- **Aktien**: Durchschnittliche Rendite 7% p.a., Standardabweichung 15%
-- **Sparbuch**: Durchschnittliche Rendite 3% p.a., Standardabweichung 5%
+- **Aktien**: Durchschnittliche Rendite 10% p.a., Standardabweichung 22%
+- **Sparbuch**: Durchschnittliche Rendite 0.5% p.a., Standardabweichung 0%
 - **Startup**: 
   - 10% Chance auf dauerhaften Erfolg mit 30-50% Rendite p.a.
   - 90% Chance auf Totalverlust im ersten Jahr
+- **100 Startups**: Durchschnittliche Rendite 20% p.a., Standardabweichung 40%
 """)
