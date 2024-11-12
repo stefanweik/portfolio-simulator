@@ -20,7 +20,7 @@ def simulate_portfolio(stocks_weight, bonds_weight, initial_amount, years):
 
     return portfolio_values
 
-# Streamlit Interface
+# Streamlit Interface and so on
 st.title('Portfolio Simulator')
 
 # Eingabefelder
