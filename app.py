@@ -12,7 +12,7 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
     # Einmalige Entscheidung über Startup Erfolg
     startup_success = np.random.random() < 0.1  # 10% Chance auf Erfolg
     if startup_success:
-        startup_yearly_return = np.random.uniform(0.3, 0.5)  # Fixe jährliche Rendite zwischen 30-50%
+        startup_yearly_return = np.random.uniform(0.3, 0.4)  # Fixe jährliche Rendite zwischen 30-50%
     
     # Simulation für jedes Jahr
     portfolio_values = [initial_amount]
@@ -49,7 +49,7 @@ with col1:
     stocks = st.slider('Aktien (%)', 0, 100, 60)
     savings = st.slider('Sparbuch (%)', 0, 100, 20)
     startup = st.slider('1 Startup (%)', 0, 100, 10)
-    startups = st.slider('100 Startups (%)', 0, 100, 10)
+    startups = st.slider('Portfolio von 100 Startups (%)', 0, 100, 10)
 
 with col2:
     initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
@@ -87,5 +87,5 @@ st.markdown("""
 - **Startup**: 
   - 10% Chance auf dauerhaften Erfolg mit 30-50% Rendite p.a.
   - 90% Chance auf Totalverlust im ersten Jahr
-- **100 Startups**: Durchschnittliche Rendite 20% p.a., Standardabweichung 40%
+- **Portfolio von 100 Startups**: Durchschnittliche Rendite 20% p.a., Standardabweichung 40%
 """)
