@@ -60,7 +60,7 @@ with col2:
 # Add refresh button
 refresh = st.button('Neu simulieren')
 if refresh:
-    st.experimental_rerun()
+    st.rerun()
 
 # Prüfe, ob Gewichte 100% ergeben
 total_weight = stocks + savings + startup + startups
