@@ -41,7 +41,7 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
     return portfolio_values
 
 # Streamlit Interface
-st.title('Portfolio Simulator')
+st.title('Zukunftstag Portfolio Challenge')
 
 # Eingabefelder
 col1, col2 = st.columns(2)
