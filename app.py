@@ -48,10 +48,10 @@ st.markdown('**Ziel**: Finde die besten Portfolio-Strategie (linke spalte) für 
 # Eingabefelder
 col1, col2 = st.columns(2)
 with col1:
-    stocks = st.slider('Aktien (%)', 0, 100, 60)
-    savings = st.slider('Sparbuch (%)', 0, 100, 20)
-    startup = st.slider('1 Startup (%)', 0, 100, 10)
-    startups = st.slider('Portfolio von 100 Startups (%)', 0, 100, 10)
+    stocks = st.slider('Aktien (%)', 0, 100, 25)
+    savings = st.slider('Sparbuch (%)', 0, 100, 25)
+    startup = st.slider('1 Startup (%)', 0, 100, 25)
+    startups = st.slider('Portfolio von 100 Startups (%)', 0, 100, 25)
 
 with col2:
     initial = st.number_input('Startkapital (CHF)', 100, 10000, 100)
@@ -88,11 +88,11 @@ else:
 
 # Zusätzliche Informationen
 st.markdown("""
-### Annahmen für die Investment-Optionen:
-- **Aktien**: Durchschnittliche Rendite 10% p.a., Standardabweichung 22%
-- **Sparbuch**: Durchschnittliche Rendite 0.5% p.a., Standardabweichung 0%
+### Informationen über die Investment-Optionen:
+- **Aktien**: Durchschnittliche Rendite 10% pro Jahr, Risiko hoch
+- **Sparbuch**: Durchschnittliche Rendite 0.5% pro Jahr, kein Risiko
 - **Startup**: 
-  - 10% Chance auf dauerhaften Erfolg mit 30-50% Rendite p.a.
+  - 10% Chance auf dauerhaften Erfolg mit 30-50% Rendite pro Jahr
   - 90% Chance auf Totalverlust im ersten Jahr
-- **Portfolio von 100 Startups**: Durchschnittliche Rendite 20% p.a., Standardabweichung 40%
+- **Portfolio von 100 Startups**: Durchschnittliche Rendite 20% pro Jahr, Risiko sehr hoch
 """)
