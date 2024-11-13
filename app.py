@@ -11,8 +11,6 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
     
     # Einmalige Entscheidung über Startup Erfolg
     startup_success = np.random.random() < 0.1  # 10% Chance auf Erfolg
-    if startup_success:
-        startup_yearly_return = np.random.uniform(0.3, 0.5)  # Fixe jährliche Rendite zwischen 30-50%
     
     # Simulation für jedes Jahr
     portfolio_values = [initial_amount]
@@ -21,12 +19,13 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
         stocks_return = np.random.normal(stocks_mean, stocks_std)
         savings_return = np.random.normal(savings_mean, savings_std)
         startups_return = np.random.normal(startups_mean, startups_std)
+        startup_yearly_return = np.random.uniform(0.3, 0.5)  # Jährliche Rendite zwischen 30-50%
         
         # Startup Return basierend auf initialem Erfolg/Misserfolg
         if not startup_success and year == 0:
             startup_return = -1.0  # Totalverlust im ersten Jahr
         elif startup_success:
-            startup_return = startup_yearly_return  # Konstante jährliche Rendite bei Erfolg
+            startup_return = startup_yearly_return  # Random jährliche Rendite bei Erfolg
         else:
             startup_return = 0  # Nach Totalverlust keine weitere Änderung
             
