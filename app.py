@@ -19,7 +19,7 @@ def simulate_portfolio(stocks_weight, savings_weight, startup_weight, startups_w
         stocks_return = np.random.normal(stocks_mean, stocks_std)
         savings_return = np.random.normal(savings_mean, savings_std)
         startups_return = np.random.normal(startups_mean, startups_std)
-        startup_yearly_return = np.random.uniform(0.3, 0.7)  # Jährliche Rendite zwischen 30-70%
+        startup_yearly_return = np.random.uniform(0.3, 0.55)  # Jährliche Rendite zwischen 30-70%
         
         # Startup Return basierend auf initialem Erfolg/Misserfolg
         if not startup_success and year == 0:
